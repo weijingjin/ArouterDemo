@@ -1,7 +1,7 @@
 package com.ovo.testarouter;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 @Route(path = "/test/activity")
-public class TestActivity extends AppCompatActivity {
+public class TestActivity extends Activity {
     private final String TAG = this.getClass().getSimpleName();
 
     @BindView(R2.id.bt_t_activity)
@@ -46,10 +46,20 @@ public class TestActivity extends AppCompatActivity {
     @OnClick({R2.id.bt_t_activity, R2.id.bt_t_module})
     public void onViewClicked(View view) {
         if (view.getId() == R.id.bt_t_activity) {
-            ARouter.getInstance().build("/main/avtivity").withString("str", "来了").navigation();
-        }else if (view.getId() == R.id.bt_t_module){
+            ARouter.getInstance().build("/main/avtivity")
+                    .withTransition(R2.anim.cunrent_anim, R2.anim.exit_anim)
+                    .withString("str", "来了").navigation();
+//            Intent intent = new Intent();
+//            intent.putExtra("main", "ontest");
+//            setResult(1122, intent);
+//            finish();
+////            在finish之后使用，activity动画
+//            overridePendingTransition(R2.anim.enter_anim
+//                    , R2.anim.exit_anim);
+    }else if (view.getId() == R.id.bt_t_module){
             ((IProviderServer)ARouter.getInstance()
                     .build("/main/MianServer").navigation()).setData();
         }
     }
+
 }
