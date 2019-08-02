@@ -33,6 +33,7 @@ public class TestFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ARouter.getInstance().inject(this);
     }
 
     @Override

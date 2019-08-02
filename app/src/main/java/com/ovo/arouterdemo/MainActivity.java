@@ -50,7 +50,8 @@ public class MainActivity extends Activity {
                 ARouter.getInstance().build("/test/activity")
                         //activity动画
                         .withTransition(R.anim.enter_anim, R.anim.cunrent_anim)
-                        .withInt("ints", 12).navigation(this, 12);
+                        .withInt("ints", 12)
+                        .navigation(this, 12);
                 break;
             case R.id.bt_module:
                 //两种方法

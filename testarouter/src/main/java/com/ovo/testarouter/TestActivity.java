@@ -16,7 +16,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-@Route(path = "/test/activity")
+/**
+ * 需要在目标页面中配置一些属性，
+ * 比方说"是否需要登陆"之类的，
+ * 可以通过 Route 注解中的 extras 属性进行扩展
+ * 通过字节操作可以标识32个开关，
+ * 通过开关标记目标页面的一些属性，
+ * 在拦截器中可以拿到这个标记进行业务逻辑判断
+ */
+@Route(path = "/test/activity", extras = 1)
 public class TestActivity extends Activity {
     private final String TAG = this.getClass().getSimpleName();
 
@@ -29,6 +37,8 @@ public class TestActivity extends Activity {
 
     @Autowired(name = "ints")
     int ints;
+    @Autowired(name = "strs")
+    String strs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +50,7 @@ public class TestActivity extends Activity {
 
         ButterKnife.bind(this);
 
-        Log.e(TAG, "" + ints);
+        Log.e(TAG, strs + "===" + ints);
     }
 
     @OnClick({R2.id.bt_t_activity, R2.id.bt_t_module})
